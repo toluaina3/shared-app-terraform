@@ -1,0 +1,21 @@
+- name: Clean artifact path
+  file:
+    state: absent
+    path: /var/www/html/app
+
+- git:
+    repo: https://<github-username>:<github-token>@github.com/Bigbotteam/shared-apps-terraform.git
+    dest: /var/www/html/app
+    version: master
+
+- name: Install NPM
+  tags: NPM install
+  shell: cd /var/www/html/app npm install
+
+- name: Start the Node.JS server
+  tags: Start Node server
+  shell: cd /var/www/html/app node index.js
+
+
+- name: make sure storage directory is writable
+  file: dest=/var/www/html/app owner=www-data group=www-data mode=0777 recurse=yes

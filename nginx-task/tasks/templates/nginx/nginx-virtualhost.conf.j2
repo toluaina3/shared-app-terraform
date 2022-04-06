@@ -1,0 +1,15 @@
+server {
+    listen       80 default_server;
+
+
+    location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_pass 172.17.0.1:93000;  # private IP and port of the Node.JS application server
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_read_timeout 1200;
+        include fastcgi_params;
+    }
+    
+   
+}

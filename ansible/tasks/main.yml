@@ -1,0 +1,11 @@
+- hosts: localhost
+  connection: local
+  remote_user: root
+  tasks:
+    - include: common.yml
+
+    - include: deploy.yml
+
+
+
+
